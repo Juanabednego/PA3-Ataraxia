@@ -195,71 +195,78 @@
                     <span>Manage Table</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/footer">
+                    <i class="bi bi-table"></i>
+                    <span>Kelola Footer</span>
+                </a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.index') }}">
+                    <i class="bi bi-table"></i>
+                    <span>Kelola Reservation</span>
+                </a>
+            </li>
         </ul>
     </aside>
 
     <!-- Main Content -->
     <main id="main" class="main">
-        <div class="container mt-4">
-            <h2 class="mb-4">Kelola Event</h2>
+    <div class="container mt-4">
+        <h2 class="mb-4">Kelola Event</h2>
 
-            <!-- Flash Message -->
-            @if(session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
-            @endif
-
-            <!-- Tombol Tambah Event -->
-            <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addEventModal">
-                <i class="bi bi-plus-circle"></i> Tambah Event
-            </button>
-
-            <!-- Tabel Event -->
-            <div class="card">
-                <div class="card-body">
-                    <table class="table table-hover table-bordered">
-                        <thead class="table-dark text-center">
-                            <tr>
-                                <th>No</th>
-                                <th>Gambar</th>
-                                <th>Nama Event</th>
-                                <th>Deskripsi</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($events as $index => $event)
-                            <tr>
-                                <td class="text-center">{{ $index + 1 }}</td>
-                                <td class="text-center">
-                                    <img src="{{ asset('storage/' . $event->image) }}" width="100" class="rounded">
-                                </td>
-                                <td>{{ $event->name }}</td>
-                                <td>{{ $event->description }}</td>
-                                <td class="text-center">
-                                    <!-- Tombol Edit -->
-                                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editEventModal-{{ $event->id }}">
-                                        <i class="bi bi-pencil-square"></i> Edit
-                                    </button>
-
-                                    <!-- Tombol Hapus -->
-                                    <form action="{{ route('kelola-event.destroy', $event->id) }}" method="POST" style="display:inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus event ini?')">
-                                            <i class="bi bi-trash"></i> Hapus
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+        <!-- Flash Message -->
+        @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
+        @endif
+
+        <!-- Tombol Tambah Event -->
+        <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addEventModal">
+            <i class="bi bi-plus-circle"></i> Tambah Event
+        </button>
+
+        <!-- Grid Event -->
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            @foreach($events as $event)
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <img src="{{ asset($event->image) }}" class="card-img-top" alt="{{ $event->name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $event->name }}</h5>
+                            <p class="card-text">{{ Str::limit($event->description, 100) }}</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between">
+                            <!-- Tombol Edit -->
+                            <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editEventModal-{{ $event->id }}">
+                                <i class="bi bi-pencil-square"></i> Edit
+                            </button>
+
+                            <!-- Tombol Hapus -->
+                            <form action="{{ route('kelola-event.destroy', $event->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus event ini?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="bi bi-trash"></i> Hapus
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Edit Event -->
+                <div class="modal fade" id="editEventModal-{{ $event->id }}" tabindex="-1" aria-labelledby="editEventModalLabel-{{ $event->id }}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <!-- Isi modal untuk edit event -->
+                        </div>
+                    </div>
+                </div>
+            @endforeach
         </div>
+    </div>
 
         <!-- Modal Tambah Event -->
         <div class="modal fade" id="addEventModal" tabindex="-1">

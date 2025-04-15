@@ -28,447 +28,177 @@
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
+  <style>
+/* Truncate teks jadi max 2 baris */
+.text-truncate-2-lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Hover lembut untuk UX bagus */
+.hover-highlight:hover {
+  background-color: #f8f9fa;
+  transition: all 0.3s ease-in-out;
+  border-left: 4px solid #0d6efd;
+}
+
+/* Bayangan dan radius lembut */
+.dropdown-menu {
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  padding: 0.5rem 0;
+  max-height: 400px;
+  overflow-y: auto;
+  backdrop-filter: blur(10px);
+}
+
+/* Badge animasi pulse */
+#notificationBadge {
+  animation: pulseBadge 1.5s infinite;
+  font-size: 0.65rem;
+  padding: 0.3em 0.5em;
+}
+
+@keyframes pulseBadge {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+</style>
 
 </head>
 
 <body class="index-page" >
 
-  <header id="header" class="header d-flex align-items-center sticky-top">
+<header id="header" class="header d-flex align-items-center sticky-top">
     <div class="container position-relative d-flex align-items-center justify-content-between">
 
       <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <!-- Logo Image -->
+        <img src="assets/img/logoo.png" alt="Ataraxia Logo" class="logo-img">
         <h1 class="sitename">Ataraxia</h1>
         <span>.</span>
       </a>
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="{{ route('index') }}" class="active">Home<br></a></li>
+          <li><a href="{{ route('index') }}" class="active">Home</a></li>
           <li><a href="#menu">Menu</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#events">Events</a></li>
-          <li><a href="#chefs">Chefs</a></li>
+          <li><a href="{{ route('index') }}">Reservation</a></li>
           <li><a href="#gallery">Gallery</a></li>
-            <ul>
           <li><a href="#contact">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a href="/book-table">Book Table</a>
+
+      @auth
+<div class="nav-item dropdown position-relative me-3">
+  <a class="nav-link dropdown-toggle d-flex align-items-center position-relative"
+     href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="bi bi-bell-fill fs-4 text-dark"></i>
+    <span id="notificationBadge"
+          class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger shadow-sm"
+          style="display: none;">
+      1
+    </span>
+  </a>
+
+  <ul class="dropdown-menu dropdown-menu-end animate__animated animate__fadeIn"
+      aria-labelledby="notificationDropdown"
+      id="notificationDropdownList"
+      style="min-width: 340px; max-width: 380px;">
+    
+    <li class="dropdown-header fw-bold text-dark px-3 pt-2">🔔 Notifikasi Terbaru</li>
+
+    <!-- Default isi sebelum AJAX -->
+    <li>
+      <a class="dropdown-item py-2 px-3 d-flex align-items-start gap-3 hover-highlight" href="#">
+        <i class="bi bi-info-circle-fill text-muted fs-5 mt-1"></i>
+        <div class="flex-grow-1">
+          <div class="fw-semibold text-muted text-truncate-2-lines">Belum ada notifikasi</div>
+          <small class="text-muted">Kamu akan melihatnya di sini</small>
+        </div>
+      </a>
+    </li>
+
+  </ul>
+</div>
+@endauth
+
+
+
+      <a href="/book-table" class="btn-book-table">Book Table</a>
 
     </div>
-  </header>
+</header>
+
 
   <main class="main">
 
     <!-- Hero Section -->
-    <section id="hero" class="hero section light-background">
-
+  <!-- Hero Section -->
+  <section id="hero" class="hero section light-background">
       <div class="container">
-        
-        <div class="row gy-4 justify-content-center justify-content-lg-between">
-          <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center">
-            <h1 data-aos="fade-up">Ataraxia Balige</h1>
-            <p data-aos="fade-up" data-aos-delay="100">Atarakan Perasaan mu di Ataraxia</p>
-            <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-              <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
-            </div>
+          <div class="hero-background">
+              <img src="assets/img/bgstory.jpg" alt="Ataraxia Balige">
+              <div class="overlay"></div>
           </div>
-          <div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out">
-            <img src="assets/img/logoo.png" class="img-fluid animated" alt="">
+          <div class="hero-content">
+              <h1 style="font-family: 'Dash Horizon', sans-serif" >Ataraxia</h1><br>
+              <p style="color: white">ATARAKAN PERASAANMU DI ATARAXIA</p>
+              <p class="open-hours" style="color: white">We are open from <br> 10.00 AM until 12.00 AM</p>
+              <a href="/book-table" class="btn-book-table">Book Table</a>
           </div>
-        </div>
       </div>
+    </section>
+    <!-- /Hero Section -->
 
-    </section><!-- /Hero Section -->
 
    <!-- Menu Section -->
    <section id="menu" class="menu section" >
 
 <!-- Section Title -->
 <div class="container section-title" data-aos="fade-up">
-  <h1>Ataraxia Menu</h1>
+  <h1>Menu</h1>
  
 </div><!-- End Section Title -->
 
-<div class="container">
+<main class="main">
+<div class="container-menu">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <ul>
+            <li class="active"><img src="{{ asset('assets/img/Marsada.jpg') }}" alt="Makanan">Makanan</li>
+            <li><img src="{{ asset('assets/img/Marsada.jpg') }}" alt="Minuman">Minuman</li>
+        </ul>
+    </div>
 
-  <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
-
-    <li class="nav-item">
-      <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#menu-starters">
-        <h4>Starters</h4>
-      </a>
-    </li><!-- End tab nav item -->
-
-    <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-breakfast">
-        <h4>Breakfast</h4>
-      </a><!-- End tab nav item -->
-
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-lunch">
-        <h4>Lunch</h4>
-      </a>
-    </li><!-- End tab nav item -->
-
-    <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dinner">
-        <h4>Dinner</h4>
-      </a>
-    </li><!-- End tab nav item -->
-
-  </ul>
-
-  <div class="tab-content" data-aos="fade-up" data-aos-delay="200">
-
-    <div class="tab-pane fade active show" id="menu-starters">
-
-      <div class="tab-header text-center">
-        <p>Menu</p>
-        <h3>Starters</h3>
-      </div>
-
-      <div class="row gy-5">
-
-        <div class="col-lg-4 menu-item">
-        <a href="{{ asset('assets/img/menu/menu-item-1.png') }}" class="glightbox">
-<img src="{{ asset('assets/img/menu/menu-item-1.png') }}" class="menu-img img-fluid" alt="">
-</a>
-
-          <h4>Magnam Tiste</h4>
-          <p class="ingredients">
-            Lorem, deren, trataro, filede, nerada
-          </p>
-          <p class="price">
-            $5.95
-          </p>
-        </div><!-- Menu Item -->
-
-        <div class="col-lg-4 menu-item">
-        <img src="{{ asset('assets/img/menu/menu-item-2.png') }}" class="menu-img img-fluid" alt="">
-        </a>
-          <h4>Aut Luia</h4>
-          <p class="ingredients">
-            Lorem, deren, trataro, filede, nerada
-          </p>
-          <p class="price">
-            $14.95
-          </p>
-        </div><!-- Menu Item -->
-
-        <div class="col-lg-4 menu-item">
-        <img src="{{ asset('assets/img/menu/menu-item-3.png') }}" class="menu-img img-fluid" alt="">
-        </a>
-          <h4>Est Eligendi</h4>
-          <p class="ingredients">
-            Lorem, deren, trataro, filede, nerada
-          </p>
-          <p class="price">
-            $8.95
-          </p>
-        </div><!-- Menu Item -->
-
-        <div class="col-lg-4 menu-item">
-        <img src="{{ asset('assets/img/menu/menu-item-4.png') }}" class="menu-img img-fluid" alt="">
-        </a>
-          <h4>Eos Luibusdam</h4>
-          <p class="ingredients">
-            Lorem, deren, trataro, filede, nerada
-          </p>
-          <p class="price">
-            $12.95
-          </p>
-        </div><!-- Menu Item -->
-
-        <div class="col-lg-4 menu-item">
-        <img src="{{ asset('assets/img/menu/menu-item-5.png') }}" class="menu-img img-fluid" alt="">
-        </a>
-          <h4>Eos Luibusdam</h4>
-          <p class="ingredients">
-            Lorem, deren, trataro, filede, nerada
-          </p>
-          <p class="price">
-            $12.95
-          </p>
-        </div><!-- Menu Item -->
-
-        <div class="col-lg-4 menu-item">
-        <img src="{{ asset('assets/img/menu/menu-item-6.png') }}" class="menu-img img-fluid" alt="">
-        </a>
-          <h4>Laboriosam Direva</h4>
-          <p class="ingredients">
-            Lorem, deren, trataro, filede, nerada
-          </p>
-          <p class="price">
-            $9.95
-          </p>
-        </div><!-- Menu Item -->
-
-      </div>
-    </div><!-- End Starter Menu Content -->
-
-    <div class="tab-pane fade" id="menu-breakfast">
-
-      <div class="tab-header text-center">
-        <p>Menu</p>
-        <h3>Breakfast</h3>
-      </div>
-
-      <div class="row gy-5">
-
-        <div class="col-lg-4 menu-item">
-        <img src="{{ asset('assets/img/menu/menu-item-1.png') }}" class="menu-img img-fluid" alt="">
-        </a>
-          <h4>Magnam Tiste</h4>
-          <p class="ingredients">
-            Lorem, deren, trataro, filede, nerada
-          </p>
-          <p class="price">
-            $5.95
-          </p>
-        </div><!-- Menu Item -->
-
-        <div class="col-lg-4 menu-item">
-        <img src="{{ asset('assets/img/menu/menu-item-2.png') }}" class="menu-img img-fluid" alt="">
-        </a>
-          <h4>Aut Luia</h4>
-          <p class="ingredients">
-            Lorem, deren, trataro, filede, nerada
-          </p>
-          <p class="price">
-            $14.95
-          </p>
-        </div><!-- Menu Item -->
-
-        <div class="col-lg-4 menu-item">
-        <img src="{{ asset('assets/img/menu/menu-item-3.png') }}" class="menu-img img-fluid" alt="">
-        </a>
-          <h4>Est Eligendi</h4>
-          <p class="ingredients">
-            Lorem, deren, trataro, filede, nerada
-          </p>
-          <p class="price">
-            $8.95
-          </p>
-        </div><!-- Menu Item -->
-
-        <div class="col-lg-4 menu-item">
-        <img src="{{ asset('assets/img/menu/menu-item-4.png') }}" class="menu-img img-fluid" alt="">
-        </a>
-          <h4>Eos Luibusdam</h4>
-          <p class="ingredients">
-            Lorem, deren, trataro, filede, nerada
-          </p>
-          <p class="price">
-            $12.95
-          </p>
-        </div><!-- Menu Item -->
-
-        <div class="col-lg-4 menu-item">
-        <img src="{{ asset('assets/img/menu/menu-item-5.png') }}" class="menu-img img-fluid" alt="">
-        </a>
-          <h4>Eos Luibusdam</h4>
-          <p class="ingredients">
-            Lorem, deren, trataro, filede, nerada
-          </p>
-          <p class="price">
-            $12.95
-          </p>
-        </div><!-- Menu Item -->
-
-        <div class="col-lg-4 menu-item">
-        <img src="{{ asset('assets/img/menu/menu-item-6.png') }}" class="menu-img img-fluid" alt="">
-        </a>
-          <h4>Laboriosam Direva</h4>
-          <p class="ingredients">
-            Lorem, deren, trataro, filede, nerada
-          </p>
-          <p class="price">
-            $9.95
-          </p>
-        </div><!-- Menu Item -->
-
-      </div>
-    </div><!-- End Breakfast Menu Content -->
-
-    <div class="tab-pane fade" id="menu-lunch">
-
-      <div class="tab-header text-center">
-        <p>Menu</p>
-        <h3>Lunch</h3>
-      </div>
-
-      <div class="row gy-5">
-
-        <div class="col-lg-4 menu-item">
-        <img src="{{ asset('assets/img/menu/menu-item-1.png') }}" class="menu-img img-fluid" alt="">
-        </a>
-          <h4>Magnam Tiste</h4>
-          <p class="ingredients">
-            Lorem, deren, trataro, filede, nerada
-          </p>
-          <p class="price">
-            $5.95
-          </p>
-        </div><!-- Menu Item -->
-
-        <div class="col-lg-4 menu-item">
-        <img src="{{ asset('assets/img/menu/menu-item-2.png') }}" class="menu-img img-fluid" alt="">
-        </a>
-          <h4>Aut Luia</h4>
-          <p class="ingredients">
-            Lorem, deren, trataro, filede, nerada
-          </p>
-          <p class="price">
-            $14.95
-          </p>
-        </div><!-- Menu Item -->
-
-        <div class="col-lg-4 menu-item">
-        <img src="{{ asset('assets/img/menu/menu-item-3.png') }}" class="menu-img img-fluid" alt="">
-        </a>
-          <h4>Est Eligendi</h4>
-          <p class="ingredients">
-            Lorem, deren, trataro, filede, nerada
-          </p>
-          <p class="price">
-            $8.95
-          </p>
-        </div><!-- Menu Item -->
-
-        <div class="col-lg-4 menu-item">
-        <img src="{{ asset('assets/img/menu/menu-item-4.png') }}" class="menu-img img-fluid" alt="">
-        </a>
-          <h4>Eos Luibusdam</h4>
-          <p class="ingredients">
-            Lorem, deren, trataro, filede, nerada
-          </p>
-          <p class="price">
-            $12.95
-          </p>
-        </div><!-- Menu Item -->
-
-        <div class="col-lg-4 menu-item">
-        <img src="{{ asset('assets/img/menu/menu-item-5.png') }}" class="menu-img img-fluid" alt="">
-        </a>
-          <h4>Eos Luibusdam</h4>
-          <p class="ingredients">
-            Lorem, deren, trataro, filede, nerada
-          </p>
-          <p class="price">
-            $12.95
-          </p>
-        </div><!-- Menu Item -->
-
-        <div class="col-lg-4 menu-item">
-        <img src="{{ asset('assets/img/menu/menu-item-6.png') }}" class="menu-img img-fluid" alt="">
-        </a>
-          <h4>Laboriosam Direva</h4>
-          <p class="ingredients">
-            Lorem, deren, trataro, filede, nerada
-          </p>
-          <p class="price">
-            $9.95
-          </p>
-        </div><!-- Menu Item -->
-
-      </div>
-    </div><!-- End Lunch Menu Content -->
-
-    <div class="tab-pane fade" id="menu-dinner">
-
-      <div class="tab-header text-center">
-        <p>Menu</p>
-        <h3>Dinner</h3>
-      </div>
-
-      <div class="row gy-5">
-
-        <div class="col-lg-4 menu-item">
-        <img src="{{ asset('assets/img/menu/menu-item-1.png') }}" class="menu-img img-fluid" alt="">
-        </a>
-          <h4>Magnam Tiste</h4>
-          <p class="ingredients">
-            Lorem, deren, trataro, filede, nerada
-          </p>
-          <p class="price">
-            $5.95
-          </p>
-        </div><!-- Menu Item -->
-
-        <div class="col-lg-4 menu-item">
-        <img src="{{ asset('assets/img/menu/menu-item-2.png') }}" class="menu-img img-fluid" alt="">
-        </a>
-          <h4>Aut Luia</h4>
-          <p class="ingredients">
-            Lorem, deren, trataro, filede, nerada
-          </p>
-          <p class="price">
-            $14.95
-          </p>
-        </div><!-- Menu Item -->
-
-        <div class="col-lg-4 menu-item">
-        <img src="{{ asset('assets/img/menu/menu-item-3.png') }}" class="menu-img img-fluid" alt="">
-        </a>
-          <h4>Est Eligendi</h4>
-          <p class="ingredients">
-            Lorem, deren, trataro, filede, nerada
-          </p>
-          <p class="price">
-            $8.95
-          </p>
-        </div><!-- Menu Item -->
-
-        <div class="col-lg-4 menu-item">
-        <img src="{{ asset('assets/img/menu/menu-item-4.png') }}" class="menu-img img-fluid" alt="">
-        </a>
-          <h4>Eos Luibusdam</h4>
-          <p class="ingredients">
-            Lorem, deren, trataro, filede, nerada
-          </p>
-          <p class="price">
-            $12.95
-          </p>
-        </div><!-- Menu Item -->
-
-        <div class="col-lg-4 menu-item">
-        <img src="{{ asset('assets/img/menu/menu-item-5.png') }}" class="menu-img img-fluid" alt="">
-        </a>
-          <h4>Eos Luibusdam</h4>
-          <p class="ingredients">
-            Lorem, deren, trataro, filede, nerada
-          </p>
-          <p class="price">
-            $12.95
-          </p>
-        </div><!-- Menu Item -->
-
-        <div class="col-lg-4 menu-item">
-        <img src="{{ asset('assets/img/menu/menu-item-6.png') }}" class="menu-img img-fluid" alt="">
-        </a>
-          <h4>Laboriosam Direva</h4>
-          <p class="ingredients">
-            Lorem, deren, trataro, filede, nerada
-          </p>
-          <p class="price">
-            $9.95
-          </p>
-        </div><!-- Menu Item -->
-
-      </div>
-    </div><!-- End Dinner Menu Content -->
-
-  </div>
-
+    <!-- Konten Menu -->
+    <div class="menu-content">
+        <div class="menu-item">
+            <img src="{{ asset('assets/img/menu/menu-item-1.png') }}" alt="Nasi Liwet Ayam">
+            <div class="menu-details">
+                <h3>Makanan</h3>
+                <h1>Nasi Liwet Ayam</h1>
+                <p>Perpaduan antara nasi liwet dan ayam yang menyajikan perpaduan yang sempuran</p>
+                <h2>Rp55.000</h2>
+            </div>
+        </div>
+        <!-- Navigasi -->
+        <div class="navigation">
+            <button class="nav-btn">&lt;</button>
+            <button class="nav-btn">&gt;</button>
+        </div>
+    </div>
 </div>
+</main>
 
-</section><!-- /Menu Section -->
  <!-- About Section -->
 
  <section id="about" class="about section" style="background: url('assets/img/bgstory.jpg') no-repeat center center/cover; padding: 80px 0; color: white;">
@@ -646,165 +376,71 @@
      
     <!-- Events Section -->
     <section id="events" class="events section">
-    <div class="container section-title" data-aos="fade-up">
-  <h1> Ataraxia Events</h1>
-</div>
-      <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="swiper init-swiper">
-          <script type="application/json" class="swiper-config">
-            {
-              "loop": true,
-              "speed": 600,
-              "autoplay": {
-                "delay": 5000
-              },
-              "slidesPerView": "auto",
-              "pagination": {
-                "el": ".swiper-pagination",
-                "type": "bullets",
-                "clickable": true
-              },
-              "breakpoints": {
-                "320": {
-                  "slidesPerView": 1,
-                  "spaceBetween": 40
-                },
-                "1200": {
-                  "slidesPerView": 3,
-                  "spaceBetween": 1
-                }
-              }
+  <div class="container section-title" data-aos="fade-up">
+    <h1>Events</h1>
+  </div>
+  <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
+    <div class="swiper init-swiper">
+      <script type="application/json" class="swiper-config">
+        {
+          "loop": true,
+          "speed": 600,
+          "autoplay": {
+            "delay": 5000
+          },
+          "slidesPerView": "auto",
+          "pagination": {
+            "el": ".swiper-pagination",
+            "type": "bullets",
+            "clickable": true
+          },
+          "breakpoints": {
+            "320": {
+              "slidesPerView": 1,
+              "spaceBetween": 40
+            },
+            "1200": {
+              "slidesPerView": 3,
+              "spaceBetween": 1
             }
-          </script>
-          <div class="swiper-wrapper">
+          }
+        }
+      </script>
 
-            <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(assets/img/events-1.jpg)">
-              <h3>Custom Parties</h3>
-              <div class="price align-self-start">$99</div>
-              <p class="description">
-                Quo corporis voluptas ea ad. Consectetur inventore sapiente ipsum voluptas eos omnis facere. Enim facilis veritatis id est rem repudiandae nulla expedita quas.
-              </p>
-            </div><!-- End Event item -->
+      <div class="swiper-wrapper">
+  @foreach($events as $event)
+    @auth
+      <a href="{{ route('pilihkursi') }}" class="swiper-slide event-item d-flex flex-column justify-content-end text-decoration-none"
+         style="background-image: url('{{ asset($event->image) }}')">
+        <h3>{{ $event->name }}</h3>
+        <p class="description">{{ $event->description }}</p>
+      </a>
+    @endauth
 
-            <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(assets/img/events-2.jpg)">
-              <h3>Private Parties</h3>
-              <div class="price align-self-start">$289</div>
-              <p class="description">
-                In delectus sint qui et enim. Et ab repudiandae inventore quaerat doloribus. Facere nemo vero est ut dolores ea assumenda et. Delectus saepe accusamus aspernatur.
-              </p>
-            </div><!-- End Event item -->
+    @guest
+      <a href="{{ route('login') }}" class="swiper-slide event-item d-flex flex-column justify-content-end text-decoration-none"
+         style="background-image: url('{{ asset($event->image) }}')">
+        <h3>{{ $event->name }}</h3>
+        <p class="description">{{ $event->description }}</p>
+      </a>
+    @endguest
+  @endforeach
+</div>
 
-            <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(assets/img/events-3.jpg)">
-              <h3>Birthday Parties</h3>
-              <div class="price align-self-start">$499</div>
-              <p class="description">
-                Laborum aperiam atque omnis minus omnis est qui assumenda quos. Quis id sit quibusdam. Esse quisquam ducimus officia ipsum ut quibusdam maxime. Non enim perspiciatis.
-              </p>
-            </div><!-- End Event item -->
-
-            <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(assets/img/events-4.jpg)">
-              <h3>Wedding Parties</h3>
-              <div class="price align-self-start">$899</div>
-              <p class="description">
-                Laborum aperiam atque omnis minus omnis est qui assumenda quos. Quis id sit quibusdam. Esse quisquam ducimus officia ipsum ut quibusdam maxime. Non enim perspiciatis.
-              </p>
-            </div><!-- End Event item -->
-
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
-      </div>
-
-    </section><!-- /Events Section -->
-
-    <!-- Chefs Section -->
-    <section id="chefs" class="chefs section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>chefs</h2>
-        <p><span>Our</span> <span class="description-title">Proffesional Chefs<br></span></p>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-            <div class="team-member">
-              <div class="member-img">
-              <img src="{{ asset('assets/img/Juan.jpg') }}" class="img-fluid" alt="">
-
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter-x"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Juan Abednego</h4>
-                <span>Master Chef</span>
-                <p>Velit aut quia fugit et et. Dolorum ea voluptate vel tempore tenetur ipsa quae aut. Ipsum exercitationem iure minima enim corporis et voluptate.</p>
-              </div>
-            </div>
-          </div><!-- End Chef Team Member -->
-
-          <div class="col-lg-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-            <div class="team-member">
-              <div class="member-img">
-              <img src="{{ asset('assets/img/Alvina.jpg') }}" class="img-fluid" alt="">
-
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter-x"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Alvina Siallagan</h4>
-                <span>Patissier</span>
-                <p>Quo esse repellendus quia id. Est eum et accusantium pariatur fugit nihil minima suscipit corporis. Voluptate sed quas reiciendis animi neque sapiente.</p>
-              </div>
-            </div>
-          </div><!-- End Chef Team Member -->
-
-          <div class="col-lg-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
-            <div class="team-member">
-              <div class="member-img">
-              <img src="{{ asset('assets/img/Roberto.jpg') }}" class="img-fluid" alt="">
-
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter-x"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Roberto</h4>
-                <span>Cook</span>
-                <p>Vero omnis enim consequatur. Voluptas consectetur unde qui molestiae deserunt. Voluptates enim aut architecto porro aspernatur molestiae modi.</p>
-              </div>
-            </div>
-          </div><!-- End Chef Team Member -->
-
-        </div>
-
-      </div>
-
-    </section><!-- /Chefs Section -->
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+</section>
+<!-- /Events Section -->
+      
 
     <!-- Book A Table Section -->
-    <section id="book-a-table" class="book-a-table section">
+    <section id="reservation" class="reservation section">
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Book A Table</h2>
-        <p><span>Book Your</span> <span class="description-title">Stay With Us<br></span></p>
+        <p>Book Your Table</p>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -815,7 +451,7 @@
   <div class="reservation-bg" style="background-image: url(assets/img/Table.jpg);"></div>
 
   <div class="reservation-overlay">
-  <a class="btn-getstarted" href="/book-table">Book a Table</a>
+  <a class="btn-getstarted" href="/reservation">Reservation Now</a>
   
   </div>
 </div>
@@ -865,6 +501,17 @@
   .reservation-button:hover {
     background: #e68a00;
   }
+  #notificationBadge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 12px;
+    background-color: red;
+    color: white;
+    padding: 5px;
+    border-radius: 50%;
+}
+
 </style>
 
         </div>
@@ -989,7 +636,7 @@
             </div>
           </div><!-- End Info Item -->
 
-        </div>
+        </div> <br>
 
         <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="600">
           <div class="row gy-4">
@@ -1028,66 +675,71 @@
   </main>
 
   <footer id="footer" class="footer dark-background">
-
-    <div class="container">
-      <div class="row gy-3">
-        <div class="col-lg-3 col-md-6 d-flex">
-          <i class="bi bi-geo-alt icon"></i>
-          <div class="address">
-            <h4>Address</h4>
-            <p>A108 Adam Street</p>
-            <p>New York, NY 535022</p>
-            <p></p>
-          </div>
-
+        <div class="container">
+            <div class="row gy-3">
+                @if(isset($footers['address']))
+                    @php $address = json_decode($footers['address']->content, true); @endphp
+                    <div class="col-lg-3 col-md-6 d-flex">
+                        <i class="bi bi-geo-alt icon"></i>
+                        <div class="address">
+                            <h4>Address</h4>
+                            <p>{{ $address['street'] }}</p>
+                            <p>{{ $address['city'] }}, {{ $address['zip'] }}</p>
+                        </div>
+                    </div>
+                @endif
+                @if(isset($footers['contact']))
+                    @php $contact = json_decode($footers['contact']->content, true); @endphp
+                    <div class="col-lg-3 col-md-6 d-flex">
+                        <i class="bi bi-telephone icon"></i>
+                        <div>
+                            <h4>Contact</h4>
+                            <p>
+                                <strong>Phone:</strong> <span>{{ $contact['phone'] }}</span><br>
+                                <strong>Email:</strong> <span>{{ $contact['email'] }}</span><br>
+                            </p>
+                        </div>
+                    </div>
+                @endif
+                @if(isset($footers['opening_hours']))
+                    @php $opening_hours = json_decode($footers['opening_hours']->content, true); @endphp
+                    <div class="col-lg-3 col-md-6 d-flex">
+                        <i class="bi bi-clock icon"></i>
+                        <div>
+                            <h4>Opening Hours</h4>
+                            <p>
+                                <strong>Mon-Sat:</strong> <span>{{ $opening_hours['mon_sat'] }}</span><br>
+                                <strong>Sunday:</strong> <span>{{ $opening_hours['sunday'] }}</span>
+                            </p>
+                        </div>
+                    </div>
+                @endif
+                @if(isset($footers['social_links']))
+                    @php $social_links = json_decode($footers['social_links']->content, true); @endphp
+                    <div class="col-lg-3 col-md-6">
+                        <h4>Follow Us</h4>
+                        <div class="social-links d-flex">
+                            <a href="{{ $social_links['twitter'] }}" class="twitter"><i class="bi bi-twitter-x"></i></a>
+                            <a href="{{ $social_links['facebook'] }}" class="facebook"><i class="bi bi-facebook"></i></a>
+                            <a href="{{ $social_links['instagram'] }}" class="instagram"><i class="bi bi-instagram"></i></a>
+                        </div>
+                    </div>
+                @endif
+            </div>
         </div>
-
-        <div class="col-lg-3 col-md-6 d-flex">
-          <i class="bi bi-telephone icon"></i>
-          <div>
-            <h4>Contact</h4>
-            <p>
-              <strong>Phone:</strong> <span>+1 5589 55488 55</span><br>
-              <strong>Email:</strong> <span>info@example.com</span><br>
-            </p>
-          </div>
+        <div class="container copyright text-center mt-4">
+            <p>© <span>Copyright</span> <strong class="px-1 sitename">Ataraxia</strong> <span>All Rights Reserved</span></p>
+            <div class="credits">
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </div>
         </div>
-
-        <div class="col-lg-3 col-md-6 d-flex">
-          <i class="bi bi-clock icon"></i>
-          <div>
-            <h4>Opening Hours</h4>
-            <p>
-              <strong>Mon-Sat:</strong> <span>11AM - 23PM</span><br>
-              <strong>Sunday</strong>: <span>Closed</span>
-            </p>
-          </div>
+        <footer id="footer" class="footer">
+        <div class="copyright">
+            &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
         </div>
+    </footer>
 
-        <div class="col-lg-3 col-md-6">
-          <h4>Follow Us</h4>
-          <div class="social-links d-flex">
-            <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
-            <a href="https://www.facebook.com/people/Ataraxia-Balige/61572251962842/" class="facebook"><i class="bi bi-facebook"></i></a>
-            <a href="https://www.instagram.com/ataraxia.balige" class="instagram"><i class="bi bi-instagram"></i></a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">Ataraxia</strong> <span>All Rights Reserved</span></p>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you've purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
-    </div>
-
-  </footer>
+    </footer>
 
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -1105,7 +757,76 @@
 
   <!-- Main JS File -->
   <script src="{{ asset('assets/js/main.js') }}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+  function loadUserNotifikasi() {
+    $.get("{{ route('load-notifikasi') }}", function (data) {
+      let html = "";
 
+      if (data.length > 0) {
+        $("#notificationBadge").show().text(data.length);
+
+        data.forEach(n => {
+          html += `
+            <li>
+              <a href="#" 
+                 class="dropdown-item py-2 px-3 d-flex align-items-start gap-3 hover-highlight view-notif-detail"
+                 data-message="${n.message}" 
+                 data-time="${n.created_at}">
+                <i class="bi bi-check-circle-fill text-success fs-5 mt-1"></i>
+                <div class="flex-grow-1">
+                  <div class="fw-semibold text-dark text-truncate-2-lines">${n.message}</div>
+                  <small class="text-muted">${n.created_at}</small> <br>
+                  <small class="text-muted">"Klik to detail"</small>
+                </div>
+              </a>
+            </li>
+          `;
+        });
+
+      } else {
+        html = `<li>
+          <a class="dropdown-item py-2 px-3 text-muted">Tidak ada notifikasi</a>
+        </li>`;
+        $("#notificationBadge").hide();
+      }
+
+      $("#notificationDropdownList").html(html);
+    });
+  }
+
+  loadUserNotifikasi();
+  setInterval(loadUserNotifikasi, 10000); // 10 detik
+</script>
+
+<script>
+  $(document).on("click", ".view-notif-detail", function (e) {
+    e.preventDefault();
+    const message = $(this).data("message");
+    const time = $(this).data("time");
+
+    $("#notificationDetailMessage").text(message);
+    $("#notificationDetailTime").text("Diterima: " + time);
+    $("#notificationDetailModal").modal("show");
+  });
+</script>
+<!-- MODAL DETAIL NOTIFIKASI -->
+<div class="modal fade" id="notificationDetailModal" tabindex="-1" aria-labelledby="notificationDetailLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content shadow rounded-3">
+      <div class="modal-header border-0">
+        <h5 class="modal-title" id="notificationDetailLabel">Detail</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+      </div>
+      <div class="modal-body">
+        <p class="mb-1 fw-semibold" id="notificationDetailMessage">...</p>
+        <p style="font-size: 12px;">Mohon tunjukkan detail ini kepada tim penulis guna keperluan verifikasi akses Anda.</p>
+ <br>
+        <small class="text-muted" id="notificationDetailTime">...</small>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 

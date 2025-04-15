@@ -29,7 +29,7 @@ class PaymentController extends Controller
     {
         $request->validate([
             'payment_method' => 'required|string',
-            'proof_of_payment' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'proof_of_payment' => 'required|image|mimes:jpeg,png,jpg|max:10240',
             'booking_id' => 'required|exists:bookings,id',
         ]);
     
@@ -49,7 +49,7 @@ class PaymentController extends Controller
             // Simpan bukti pembayaran
             $file = $request->file('proof_of_payment');
             $filename = time() . '_' . $file->getClientOriginalName();
-            $filePath = $file->storeAs('public/payments', $filename);
+            $filePath = $file->move(public_path('uploads/payments'), $filename);
     
             Payment::create([
                 'user_id' => Auth::id(),

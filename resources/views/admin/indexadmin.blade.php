@@ -296,7 +296,7 @@
 
     <!-- Kelola Event -->
     <li class="nav-item">
-      <a class="nav-link " href="kelola-event">
+      <a class="nav-link " href="/kelola-event">
         <i class="bi bi-calendar-event"></i>
         <span>Kelola Event</span>
       </a>
@@ -309,7 +309,18 @@
         <span>Manage Table</span>
       </a>
     </li>
-
+    <li class="nav-item">
+                <a class="nav-link" href="/footer">
+                    <i class="bi bi-table"></i>
+                    <span>Kelola Footer</span>
+                </a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.index') }}">
+                    <i class="bi bi-table"></i>
+                    <span>Kelola Reservation</span>
+                </a>
+            </li>
   </ul>
 </aside>
 

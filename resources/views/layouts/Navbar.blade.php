@@ -37,18 +37,20 @@
         <span>.</span>
       </a>
 
+      <!-- Modified navmenu for centering -->
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="{{ route('index') }}" class="active">Home<br></a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#menu">Menu</a></li>
-          <li><a href="#events">Events</a></li>
-          <li><a href="#chefs">Chefs</a></li>
-          <li><a href="#gallery">Gallery</a></li>
-          <li><a href="#contact">Contact</a></li>
-          
+          <li><a href="{{ route('index') }}" class="active">Home</a></li>
+          <li><a href="{{ route('index') }}">Menu</a></li>
+          <li><a href="{{ route('index') }}">About</a></li>
+          <li><a href="{{ route('index') }}">Events</a></li>
+          <li><a href="{{ route('index') }}">Reservation</a></li>
+          <li><a href="{{ route('index') }}">Gallery</a></li>
+          <li><a href="{{ route('index') }}"></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
     
-
           <li>
             <a class="dropdown-item" href="{{ route('logout') }}"
                onclick="event.preventDefault();
@@ -60,7 +62,6 @@
               @csrf
             </form>
           </li>
-
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>

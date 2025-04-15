@@ -25,6 +25,16 @@
                     @enderror
                 </div>
 
+                <div class="mb-3">
+                    <label for="phone" class="form-label text-dark"><i class="fas fa-phone"></i> Phone Number</label>
+                    <input id="phone" type="text" class="form-control form-control-lg @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required placeholder="Enter your phone number">
+                    @error('phone')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
                 <!-- Email -->
                 <div class="mb-3">
                     <label for="email" class="form-label text-dark"><i class="fas fa-envelope"></i> Email Address</label>

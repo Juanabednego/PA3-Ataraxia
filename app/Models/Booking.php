@@ -9,7 +9,7 @@ class Booking extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'seats', 'total_price', 'status'];
+    protected $fillable = ['user_id','event_id','seats', 'total_price', 'status'];
 
     public function user()
     {
@@ -20,4 +20,10 @@ class Booking extends Model
     {
         return $this->hasOne(Payment::class);
     }
+
+    public function event()
+{
+    return $this->belongsTo(Event::class);
 }
+}
+

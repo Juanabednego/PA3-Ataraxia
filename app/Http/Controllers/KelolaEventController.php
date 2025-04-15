@@ -95,4 +95,10 @@ class KelolaEventController extends Controller
         $events = Event::all(); // Ambil semua event dari database
         return view('BookTable', compact('events')); // Kirim ke tampilan user
     }
+
+    public function publicEvents()
+    {
+        $events = Event::all();
+        return view('index', compact('events')); 
+    }
 }

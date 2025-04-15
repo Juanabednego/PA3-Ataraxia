@@ -9,19 +9,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <style>
         body {
-            background-color:rgb(53, 0, 68); /* Latar belakang hitam */
-            color:rgb(0, 0, 0); /* Teks putih */
+            background-color: rgb(53, 0, 68); /* Dark background */
+            color: rgb(0, 0, 0); /* Text color */
         }
         .container {
             max-width: 500px;
             margin-top: 50px;
-            background:rgb(255, 255, 255); /* Latar belakang putih */
+            background: rgb(255, 255, 255); /* White background */
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 4px 10px rgb(83, 1, 99);
@@ -31,27 +30,45 @@
             border: none;
         }
         .btn-primary {
-            background-color: #6f42c1; /* Warna ungu untuk tombol */
+            background-color: #6f42c1; /* Purple button */
             border: none;
         }
         .form-label {
             font-weight: bold;
         }
         .modal-content {
-            background-color: #333333; /* Latar belakang modal hitam */
-            color: #ffffff; /* Teks putih di modal */
+            background-color: #333333; /* Modal background */
+            color: #ffffff; /* Text color in modal */
         }
         .form-select, .form-control {
-            background-color:rgb(248, 250, 248);
+            background-color: rgb(248, 250, 248);
             color: #000;
         }
         .payment-details {
             margin-top: 20px;
             padding: 10px;
-            background-color:rgb(255, 255, 255); /* Warna ungu */
+            background-color: rgb(255, 255, 255); /* Light background for details */
             color: #000;
             border-radius: 8px;
-            display: none; /* Menyembunyikan detail rekening awal */
+            display: none; /* Initially hide payment details */
+        }
+        .payment-details div {
+            display: flex;
+            align-items: center;
+        }
+        .payment-details span {
+            margin-right: 10px;
+        }
+        .payment-details .copy-btn {
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        .payment-details .copy-btn i {
+            font-size: 18px;
+            color: #6f42c1; /* Purple icon */
+        }
+        .payment-details .copy-btn:hover i {
+            color: #495057; /* Darker color when hovering */
         }
     </style>
 </head>
@@ -76,14 +93,16 @@
                 </select>
             </div>
 
-            <!-- Bagian untuk menampilkan nomor rekening berdasarkan metode pembayaran -->
+            <!-- Display account details (account number + copy icon) -->
             <div id="paymentDetails" style="display: none;">
-    <span id="accountNumber"></span>
-    <button id="copyButton" class="btn btn-outline-secondary" style="margin-left: 10px;">
-        <i class="fas fa-copy"></i> Salin
-    </button>
-</div>
-
+                <div>
+                    <span id="accountNumber"></span>
+                    <button id="copyButton" class="copy-btn">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+                <span id="accountName"></span><br>
+            </div>
 
             <div class="mb-3">
                 <label class="form-label">Upload Bukti Transfer:</label>
@@ -93,7 +112,7 @@
             <button type="submit" class="btn btn-primary w-100">Konfirmasi Pembayaran</button>
         </form>
 
-        <!-- Tombol kembali ke halaman sebelumnya -->
+        <!-- Back button -->
         <button onclick="history.back()" class="btn btn-back w-100 mt-3">Kembali</button>
     </div>
 
@@ -118,42 +137,42 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // Fungsi untuk menampilkan nomor rekening sesuai dengan metode pembayaran yang dipilih
-      // Fungsi untuk menampilkan nomor rekening sesuai dengan metode pembayaran yang dipilih
-$("select[name='payment_method']").change(function() {
-    var paymentMethod = $(this).val();
-    var accountNumber = '';
+        // Function to show account number and account name based on selected payment method
+        $("select[name='payment_method']").change(function() {
+            var paymentMethod = $(this).val();
+            var accountNumber = '';
+            var accountName = '';
 
-    if (paymentMethod === 'bca') {
-        accountNumber = 'Nomor Rekening : 123-456-7890';
-    } else if (paymentMethod === 'mandiri') {
-        accountNumber = 'Nomor Rekening : 987-654-3210';
-    } else if (paymentMethod === 'ovo') {
-        accountNumber = 'Nomor Rekening : 0812-3456-7890';
-    } else if (paymentMethod === 'dana') {
-        accountNumber = 'Nomor Rekening : 0812-9876-5432';
-    }
+            if (paymentMethod === 'bca') {
+                accountNumber = '123-456-7890';
+                accountName = 'Nama Rekening: David Simanjuntak';
+            } else if (paymentMethod === 'mandiri') {
+                accountNumber = '987-654-3210';
+                accountName = 'Nama Rekening: David Simanjuntak';
+            } else if (paymentMethod === 'ovo') {
+                accountNumber = '0812-3456-7890';
+                accountName = 'Nama Rekening: David Simanjuntak';
+            } else if (paymentMethod === 'dana') {
+                accountNumber = '0812-9876-5432';
+                accountName = 'Nama Rekening: David Simanjuntak';
+            }
 
-    // Menampilkan nomor rekening dan tombol salin
-    $("#accountNumber").text(accountNumber);
-    $("#paymentDetails").show(); // Menampilkan nomor rekening
+            // Display account number and name
+            $("#accountNumber").text('Nomor Rekening: ' + accountNumber);
+            $("#accountName").text(accountName);
+            $("#paymentDetails").show(); // Show payment details
 
-    // Menangani aksi klik tombol salin
-    $("#copyButton").click(function() {
-        var copyText = document.getElementById("accountNumber").textContent; // Mengambil teks nomor rekening
-        navigator.clipboard.writeText(copyText) // Menyalin ke clipboard
-            .then(function() {
-                alert("Nomor rekening disalin: " + copyText); // Menampilkan alert setelah disalin
-            })
-            .catch(function(error) {
-                alert("Gagal menyalin: " + error); // Menangani error
+            // Handle the click event for the copy button (only copy account number)
+            $("#copyButton").click(function() {
+                var copyText = document.getElementById("accountNumber").textContent; // Only copy the account number
+                navigator.clipboard.writeText(copyText) // Copy to clipboard
+                    .then(function() {
+                        alert("Nomor rekening disalin: " + copyText); // Success message
+                    })
+                    .catch(function(error) {
+                        alert("Gagal menyalin: " + error); // Error message
+                    });
             });
-    });
-
-
-
-            $("#accountNumber").text(accountNumber);
-            $("#paymentDetails").show(); // Menampilkan nomor rekening
         });
 
         // Submit form
@@ -168,7 +187,7 @@ $("select[name='payment_method']").change(function() {
                 contentType: false,
                 processData: false,
                 success: function() {
-                    $("#confirmationModal").modal("show"); // Tampilkan modal konfirmasi
+                    $("#confirmationModal").modal("show"); // Show confirmation modal
                 },
                 error: function() {
                     alert("Terjadi kesalahan, silakan coba lagi.");

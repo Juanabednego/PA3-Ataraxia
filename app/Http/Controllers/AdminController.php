@@ -41,4 +41,27 @@ class AdminController extends Controller
 
         return redirect()->route('admin.tables-data')->with('success', 'Booking berhasil dibatalkan.');
     }
+     // Delete all bookings
+     public function deleteAll()
+     {
+         try {
+             Booking::truncate();  // Deletes all booking records
+             return redirect()->route('admin.tables-data')->with('success', 'Semua booking berhasil dihapus.');
+         } catch (\Exception $e) {
+             return redirect()->route('admin.tables-data')->with('error', 'Gagal menghapus semua booking.');
+         }
+     }
+
+     public function getBookingHistory()
+    {
+        // Fetch booking history for the logged-in user
+        $bookings = Booking::where('user_id', Auth::id())
+            ->whereIn('status', ['confirmed', 'pending'])
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // Return bookings as JSON
+        return response()->json(['bookings' => $bookings]);
+    }
+
 }
