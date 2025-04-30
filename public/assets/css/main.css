@@ -14,14 +14,14 @@
   --background-color: #ffffff;
   --default-color: #303030;
   --heading-color: #303030;
-  --accent-color: #883899;
+  accent-color: #883899;
   --surface-color: #212529;
   --contrast-color: #212529;
 }
 
 :root {
   --nav-color: #303030;
-  --nav-hover-color: #883899;
+  -- nav-hover-color: #883899;
   --nav-mobile-background-color: #ffffff;
 }
 
@@ -138,7 +138,7 @@ h6 {
 }
 
 .scrolled .header {
-  box-shadow: 0px 0 18px rgba(205, 2, 202, 0.793);
+  box-shadow: 0px 0 18px #cd02caca;
 }
 
 /*--------------------------------------------------------------
@@ -668,6 +668,7 @@ p {
 .sitename {
   font-family: "Dash Horizon", sans-serif;
   font-size: 20px;
+
 }
 
 /* Gambar Latar */

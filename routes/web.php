@@ -18,6 +18,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FooterController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\AdminReservationController;
+use App\Http\Controllers\MakananController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\HistoriController;
 
 
 
@@ -113,3 +116,23 @@ Route::get('/notifikasi-user', [BookingController::class, 'getNotifikasiUser'])
     ->name('load-notifikasi');
 
     Route::get('/notifikasi-reservation', [AdminReservationController::class, 'getNotifikasiReservation'])->name('notif.reservation');
+
+
+
+    Route::get('/kelola-menu', [MakananController::class, 'index'])->name('kelola-menu.index');
+    Route::post('/kelola-menu', [MakananController::class, 'store'])->name('kelola-menu.store');
+    Route::put('/kelola-menu/{id}', [MakananController::class, 'update'])->name('kelola-menu.update');
+    // Route::delete('/kelola-menu/{id}', [MakananController::class, 'destroy'])->name('kelola-menu.destroy');
+    Route::delete('/kelola-menu/{makanan}', [MakananController::class, 'destroy'])->name('kelola-menu.destroy');
+
+    
+
+    Route::get('/menu', [MenuController::class, 'index'])->name('menu');
+
+    Route::get('/histori', [HistoriController::class, 'index'])->name('histori');
+
+    Route::get('/akun', function () {
+        return view('akun');
+    })->middleware('auth')->name('akun');
+    
+    

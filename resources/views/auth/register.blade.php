@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="d-flex justify-content-center align-items-center min-vh-100">
-    <div class="card shadow-lg p-4 rounded border-0" style="max-width: 400px; width: 100%; background: #fff;">
+<div class="d-flex justify-content-center align-items-center min-vh-100" style="background:  #B5338A;">
+    <div class="card shadow-lg p-4 rounded border-0" style="max-width: 400px; width: 100%; background: ;">
         
         <!-- Logo Ataraxia -->
         <div class="text-center">
-            <h2 class="mb-3" style="font-family: 'Dash Horizon', sans-serif !important; color: #5b2e91; font-weight: bold;">Ataraxia</h2>
+            <h2 class="mb-3" style="font-family: 'Dash Horizon', sans-serif !important; color:  #B5338A; font-weight: bold;">Ataraxia</h2>
             <p class="text-muted">Create your account</p>
         </div>
 
@@ -65,14 +65,14 @@
 
                 <!-- Register Button -->
                 <div class="mt-3">
-                    <button type="submit" class="btn w-100 fw-bold text-white" style="background: #5b2e91; border: none; font-size: 18px;">
+                    <button type="submit" class="btn w-100 fw-bold text-white" style="background:  #B5338A; border: none; font-size: 18px;">
                         <i class="fas fa-user-plus"></i> {{ __('Register') }}
                     </button>
                 </div>
 
                 <!-- Already have an account? -->
                 <div class="text-center mt-3">
-                    <p class="text-dark">Already have an account? <a href="{{ route('login') }}" class="text-decoration-none fw-bold" style="color: #5b2e91;">Login here</a></p>
+                    <p class="text-dark">Already have an account? <a href="{{ route('login') }}" class="text-decoration-none fw-bold" style="color:  #B5338A;">Login here</a></p>
                 </div>
             </form>
         </div>

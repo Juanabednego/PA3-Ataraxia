@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="d-flex justify-content-center align-items-center min-vh-100" style="background: linear-gradient(135deg,rgb(0, 0, 0), #5b2e91);">
+<div class="d-flex justify-content-center align-items-center min-vh-100" style="background: linear-gradient(135deg,rgb(238, 151, 219), #B5338A);">
     <div class="card shadow-lg p-4 rounded border-0" style="max-width: 400px; width: 100%; background: #fff;">
-        <div class="card-header text-center rounded" style="background: #5b2e91; color: #fff;">
+        <div class="card-header text-center rounded" style="background: #B5338A; color: #fff;">
             <h2 class="mb-0" style="font-family: 'Dash Horizon', sans-serif;">Ataraxia</h2>
         </div>
         
@@ -40,20 +40,20 @@
                     </div>
 
                     @if (Route::has('password.request'))
-                        <a class="text-decoration-none" href="{{ route('password.request') }}" style="color: #5b2e91;">
+                        <a class="text-decoration-none" href="{{ route('password.request') }}" style="color: #B5338A;">
                             {{ __('Forgot Password?') }}
                         </a>
                     @endif
                 </div>
 
                 <div class="mt-3">
-                    <button type="submit" class="btn btn-dark w-100 fw-bold" style="background: #5b2e91; border: none;">
+                    <button type="submit" class="btn btn-dark w-100 fw-bold" style="background: #B5338A; border: none;">
                         <i class="fas fa-sign-in-alt"></i> {{ __('Login') }}
                     </button>
                 </div>
 
                 <div class="text-center mt-3">
-                    <p class="text-dark">Belum punya akun? <a href="{{ route('register') }}" class="text-decoration-none fw-bold" style="color: #5b2e91;">Daftar sekarang</a></p>
+                    <p class="text-dark">Belum punya akun? <a href="{{ route('register') }}" class="text-decoration-none fw-bold" style="color: #B5338A;">Daftar sekarang</a></p>
                 </div>
             </form>
         </div>

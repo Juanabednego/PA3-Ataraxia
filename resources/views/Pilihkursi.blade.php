@@ -192,12 +192,31 @@
         </div>
 
         <!-- Booking Section -->
-        <div class="mt-4">
-            <h4>Total Harga: <span id="totalPrice">Rp 0</span></h4>
-            <h5>Tempat Duduk: <span id="selectedSeats">-</span></h5>
-            <button id="confirmBooking" class="btn btn-success mt-2" disabled>Konfirmasi Pemesanan</button>
-            <button class="btn btn-danger mt-2" id="cancelSelection">Cancel</button>
-        </div>
+       <!-- Booking Section -->
+<div class="mt-5">
+  <div class="card shadow-lg border-0 rounded-4 p-4 bg-light">
+    <h4 class="mb-3 fw-semibold text-dark">
+      <i class="bi bi-cash-stack me-2 text-success"></i> Total Harga: 
+      <span id="totalPrice" class="text-success">Rp 0</span>
+    </h4>
+
+    <h5 class="mb-4 text-dark fw-normal">
+      <i class="bi bi-chair me-2 text-primary"></i> Tempat Duduk: 
+      <span id="selectedSeats" class="text-primary">-</span>
+    </h5>
+
+    <div class="d-flex gap-3">
+      <button id="confirmBooking" class="btn btn-success px-4 py-2 rounded-pill shadow-sm d-flex align-items-center" disabled>
+        <i class="bi bi-check2-circle me-2"></i> Konfirmasi Pemesanan
+      </button>
+
+      <button class="btn btn-outline-danger px-4 py-2 rounded-pill shadow-sm d-flex align-items-center" id="cancelSelection">
+        <i class="bi bi-x-circle me-2"></i> Batalkan
+      </button>
+    </div>
+  </div>
+</div>
+
     </div>
 
     @include('layouts.footer')

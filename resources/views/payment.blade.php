@@ -14,7 +14,7 @@
 
     <style>
         body {
-            background-color: rgb(53, 0, 68); /* Dark background */
+            background-color: #B5338A; /* Dark background */
             color: rgb(0, 0, 0); /* Text color */
         }
         .container {
@@ -23,14 +23,14 @@
             background: rgb(255, 255, 255); /* White background */
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0px 4px 10px rgb(83, 1, 99);
+            box-shadow: 0px 4px 10px #B5338A;
         }
         .btn-back {
             background-color: #6c757d;
             border: none;
         }
         .btn-primary {
-            background-color: #6f42c1; /* Purple button */
+            background-color: #B5338A; /* Purple button */
             border: none;
         }
         .form-label {
@@ -65,7 +65,7 @@
         }
         .payment-details .copy-btn i {
             font-size: 18px;
-            color: #6f42c1; /* Purple icon */
+            color: #B5338A; /* Purple icon */
         }
         .payment-details .copy-btn:hover i {
             color: #495057; /* Darker color when hovering */
@@ -74,7 +74,7 @@
 </head>
 <body>
     <div class="container text-center">
-        <h2 class="mb-4" style="color: #6f42c1;">Pembayaran</h2>
+        <h2 class="mb-4" style="color: #B5338A;">Pembayaran</h2>
 
         <p><strong>Kursi yang Dipilih:</strong> {{ implode(', ', json_decode($booking->seats)) }}</p>
         <p><strong>Total Harga:</strong> Rp {{ number_format($booking->total_price) }}</p>
