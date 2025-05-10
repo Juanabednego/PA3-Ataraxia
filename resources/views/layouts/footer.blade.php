@@ -6,8 +6,8 @@
           <i class="bi bi-geo-alt icon"></i>
           <div class="address">
             <h4>Address</h4>
-            <p>A108 Adam Street</p>
-            <p>New York, NY 535022</p>
+            <p>Jl. By Pass Balige, Tambunan Sunge,</p>
+            <p>Kec. Balige, Toba, Sumatera Utara</p>
             <p></p>
           </div>
 
@@ -18,7 +18,7 @@
           <div>
             <h4>Contact</h4>
             <p>
-              <strong>Phone:</strong> <span>+1 5589 55488 55</span><br>
+              <strong>Phone:</strong> <span>0812-6328-1469</span><br>
               <strong>Email:</strong> <span>info@example.com</span><br>
             </p>
           </div>
@@ -29,8 +29,7 @@
           <div>
             <h4>Opening Hours</h4>
             <p>
-              <strong>Mon-Sat:</strong> <span>11AM - 23PM</span><br>
-              <strong>Sunday</strong>: <span>Closed</span>
+              <strong>Every Day :</strong> <span>10AM - 23PM</span><br>
             </p>
           </div>
         </div>
@@ -50,11 +49,7 @@
     <div class="container copyright text-center mt-4">
       <p>© <span>Copyright</span> <strong class="px-1 sitename">Ataraxia</strong> <span>All Rights Reserved</span></p>
       <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you've purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        Designed by Kelompok 9
       </div>
     </div>
 
