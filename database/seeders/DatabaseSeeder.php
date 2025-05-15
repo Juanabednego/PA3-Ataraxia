@@ -14,14 +14,17 @@ class DatabaseSeeder extends Seeder
     {
         // Tambah akun admin default
         User::updateOrCreate([
-            'email' => 'admin@example.com',
+            'email' => 'admin@gmail.com',
         ], [
             'name' => 'Admin',
             'password' => Hash::make('password123'), 
             'role' => 'admin'
         ]);
 
-        // Jalankan seeder lainnya jika ada
-        // $this->call(OtherSeeder::class);
+        // Jalankan seeder lainnya
+        // $this->call([
+        //     ReviewSeeder::class,
+        //     AboutSectionSeeder::class,
+        // ]);
     }
 }

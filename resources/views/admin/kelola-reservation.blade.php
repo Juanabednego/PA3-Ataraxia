@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Admin Dashboard - Kelola Reservation</title>
-    <link href="{{ asset('admin/assets/img/favicon.png') }}" rel="icon">
+    <title>Kelola Reservation</title>
+    <link href="{{ asset('assets/img/Ataraxialogo.jpg') }}" rel="icon">
     <link href="{{ asset('admin/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
@@ -43,8 +43,9 @@
         }
     </style>
 </head>
-
+@include('layouts.AdminNav')
 <body>
+<<<<<<< HEAD
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -258,6 +259,8 @@
 
 </aside>
 
+=======
+>>>>>>> 2a06928 (Initial commit)
 <main id="main" class="main"> 
 <div class="container mt-4">
         <div class="page-title">Kelola Reservasi</div>
@@ -296,7 +299,10 @@
                             <form action="{{ route('admin.update', $res->id) }}" method="POST" class="d-flex gap-2">
                                 @csrf
                                 @method('PATCH')
-                                <button name="status" value="confirmed" class="btn btn-outline-success btn-sm">Confirm</button>
+                                <button name="status" value="confirmed" class="btn btn-sm" style="color: #8174A0; border-color: #8174A0; background-color: transparent;">
+  Confirm
+</button>
+
                                 <button name="status" value="cancelled" class="btn btn-outline-danger btn-sm">Cancel</button>
                             </form>
                         </td>
@@ -308,13 +314,11 @@
     </div>
 </main>
 
-<footer id="footer" class="footer mt-auto py-3 bg-light">
-    <div class="container">
-        <div class="text-center text-muted">
-            &copy; {{ date('Y') }} <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-        </div>
-    </div>
-</footer>
+<footer id="footer" class="footer">
+      <div class="copyright">
+          &copy; Copyright <strong><span>Ataraxia</span></strong>. All Rights Reserved
+      </div>
+    </footer>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

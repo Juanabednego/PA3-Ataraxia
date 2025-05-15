@@ -27,7 +27,16 @@ class RegisteredUserController extends Controller
      * Handle an incoming registration request.
      *
      * @throws \Illuminate\Validation\ValidationException
+     * 
+     *
      */
+
+   
+     *
+     * @var string
+     */
+    protected $redirectTo = '/';
+
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
@@ -42,12 +51,12 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'phone' => $request->phone,  // Menyimpan nomor telepon
-        ]);
+        ]);a
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect('/');
     }
 }

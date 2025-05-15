@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
+use App\Models\Review;
+use App\Models\AboutSection;
 use Illuminate\Support\Facades\Storage;
 
 class KelolaEventController extends Controller
@@ -19,65 +21,65 @@ class KelolaEventController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'date' => 'required|date',
+            'harga' => 'required|numeric|min:0',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
-    
+
         // Cek apakah ada file yang diunggah
         if ($request->hasFile('image')) {
-            // Ambil file dari request
             $image = $request->file('image');
-    
-            // Tentukan nama unik untuk file
             $imageName = time() . '_' . $image->getClientOriginalName();
-    
-            // Simpan langsung ke dalam folder `public/events`
             $image->move(public_path('events'), $imageName);
-    
-            // Simpan hanya nama file untuk database
             $imagePath = 'events/' . $imageName;
         } else {
             $imagePath = null;
         }
-    
-        // Simpan data ke database
+
+        // Simpan data ke database (pakai input dari $request, bukan string literal)
         Event::create([
             'name' => $request->name,
             'description' => $request->description,
+            'date' => $request->date,
+            'harga' => $request->harga,
             'image' => $imagePath,
         ]);
-    
+
         return redirect()->route('kelola-event')->with('success', 'Event berhasil ditambahkan!');
     }
-    
-    
+
     public function update(Request $request, $id)
     {
-        $event = Event::findOrFail($id); // Temukan event berdasarkan ID
-    
+        $event = Event::findOrFail($id);
+
         $request->validate([
             'name' => 'required',
             'description' => 'required',
+            'date' => 'required|date',
+            'harga' => 'required|numeric|min:0',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
-    
+
+        $data = [
+            'name' => $request->name,
+            'description' => $request->description,
+            'date' => $request->date,
+            'harga' => $request->harga,
+        ];
+
         if ($request->hasFile('image')) {
-            // Hapus gambar lama jika ada
             if ($event->image) {
                 Storage::disk('public')->delete($event->image);
             }
-            // Simpan gambar baru
-            $event->image = $request->file('image')->store('events', 'public');
+            $image = $request->file('image');
+            $imagePath = $image->store('events', 'public');
+            $data['image'] = $imagePath;
         }
-    
-        // Update data event
-        $event->update([
-            'name' => $request->name,
-            'description' => $request->description,
-        ]);
-    
+
+        $event->update($data);
+
         return redirect()->route('kelola-event')->with('success', 'Event berhasil diperbarui!');
     }
-    
 
     public function destroy(Event $event)
     {
@@ -92,13 +94,16 @@ class KelolaEventController extends Controller
 
     public function showEvents()
     {
-        $events = Event::all(); // Ambil semua event dari database
-        return view('BookTable', compact('events')); // Kirim ke tampilan user
+        $events = Event::all();
+        return view('BookTable', compact('events'));
     }
 
     public function publicEvents()
     {
+        $reviews = Review::with('user')->where('is_hidden', false)->latest()->get();
         $events = Event::all();
-        return view('index', compact('events')); 
+        $about = AboutSection::first(); // ambil data our story
+        return view('index', compact('reviews', 'events', 'about'));
+
     }
 }

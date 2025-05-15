@@ -86,7 +86,7 @@
             <div class="mb-3">
                 <label class="form-label">Metode Pembayaran:</label>
                 <select name="payment_method" class="form-select" required>
-                    <option value="bca">Bank BCA</option>
+                    <option value="bca">Bank BRI</option>
                     <option value="mandiri">Bank Mandiri</option>
                     <option value="ovo">OVO</option>
                     <option value="dana">DANA</option>
@@ -127,7 +127,7 @@
                     <p>Pembayaran Anda sedang diproses. Silakan tunggu konfirmasi dari Admin.</p>
                 </div>
                 <div class="modal-footer">
-                    <a href="/" class="btn btn-success w-100">Kembali ke Beranda</a>
+                    <a href="/histori" class="btn btn-success w-100">Kembali</a>
                 </div>
             </div>
         </div>
@@ -143,8 +143,8 @@
             var accountNumber = '';
             var accountName = '';
 
-            if (paymentMethod === 'bca') {
-                accountNumber = '123-456-7890';
+            if (paymentMethod === 'BRI') {
+                accountNumber = '3829-0102-7786-533';
                 accountName = 'Nama Rekening: David Simanjuntak';
             } else if (paymentMethod === 'mandiri') {
                 accountNumber = '987-654-3210';

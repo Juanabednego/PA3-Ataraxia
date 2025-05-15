@@ -4,8 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Admin Dashboard</title>
-    <link href="{{ asset('admin/assets/img/favicon.png') }}" rel="icon">
+    <title>Kelola Booking Table</title>
     <link href="{{ asset('admin/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
@@ -18,15 +17,50 @@
             color: #333;
         }
 
+        header {
+            background-color: #AA389F;
+            color: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
         footer {
             background-color: #AA389F;
             color: white;
             text-align: center;
             padding: 10px;
         }
+        
+
+        #sidebar {
+            background-color: #343a40;
+            color: white;
+            width: 250px;
+            min-height: 100vh;
+        }
+
+        #sidebar .sidebar-nav {
+            padding-left: 0;
+        }
+
+        #sidebar .nav-item {
+            list-style-type: none;
+        }
+
+        #sidebar .nav-item .nav-link {
+            color:rgb(65, 1, 194);
+            padding: 10px 20px;
+            display: block;
+            text-transform: uppercase;
+        }
+
+        #sidebar .nav-item .nav-link:hover {
+            background-color: #495057;
+            color: white;
+        }
 
         #main {
-            margin-left: 300px;
+            margin-left: 270px;
             padding: 20px;
         }
 
@@ -55,8 +89,7 @@
             border-collapse: collapse;
         }
 
-        .table th,
-        .table td {
+        .table th, .table td {
             padding: 15px;
             border: 1px solid #ddd;
             text-align: center;
@@ -85,7 +118,7 @@
             transition: all 0.3s ease;
         }
 
-        .btn-info {
+        .btn-info{
             background-color: #AA389F;
             color: white;
         }
@@ -123,7 +156,7 @@
 
         /* Modal Styles */
         .modal-content {
-            background-color: #ffffff;
+            background-color: #ffffff; /* White background for better contrast */
             color: #000;
         }
 
@@ -139,109 +172,26 @@
 </head>
 
 <body>
-    <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
         <div class="d-flex align-items-center justify-content-between">
-            <a href="index" class="logo d-flex align-items-center">
-                <img src="admin/assets/img/logo.png" alt="">
-                <span class="d-none d-lg-block">Admin</span>
+            <a href="{{ url('/') }}" class="logo d-flex align-items-center">
+                <img src="{{ asset('admin/assets/img/logo.png') }}" alt="">
+                <span class="d-none d-lg-block">Admin Dashboard</span>
             </a>
-            <i class="bi bi-list toggle-sidebar-btn"></i>
         </div>
-
-        <div class="search-bar">
-            <form class="search-form d-flex align-items-center" method="POST" action="#">
-                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-            </form>
-        </div>
-
-        <nav class="header-nav ms-auto">
-            <ul class="d-flex align-items-center">
-                <li class="nav-item d-block d-lg-none">
-                    <a class="nav-link nav-icon search-bar-toggle" href="#">
-                        <i class="bi bi-search"></i>
-                    </a>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                        <i class="bi bi-bell"></i>
-                        <span class="badge bg-primary badge-number">4</span>
-                    </a>
-
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-                        <li class="dropdown-header">
-                            You have 4 new notifications
-                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-                        </li>
-                        <li><hr class="dropdown-divider"></li>
-
-                        <!-- Notification Item -->
-                        <li class="notification-item">
-                            <i class="bi bi-exclamation-circle text-warning"></i>
-                            <div>
-                                <h4>Lorem Ipsum</h4>
-                                <p>Quae dolorem earum veritatis oditseno</p>
-                                <p>30 min. ago</p>
-                            </div>
-                        </li>
-
-                        <li><hr class="dropdown-divider"></li>
-                        <li class="dropdown-footer">
-                            <a href="#">Show all notifications</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="nav-item dropdown pe-3">
-                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <img src="admin/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-                        <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
-                    </a>
-
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                        <li class="dropdown-header">
-                            <h6>Kevin Anderson</h6>
-                            <span>Web Designer</span>
-                        </li>
-                        <li><hr class="dropdown-divider"></li>
-
-                        <li><a class="dropdown-item d-flex align-items-center" href="users-profile">
-                            <i class="bi bi-person"></i> My Profile
-                        </a></li>
-                        <li><hr class="dropdown-divider"></li>
-
-                        <li><a class="dropdown-item d-flex align-items-center" href="users-profile">
-                            <i class="bi bi-gear"></i> Account Settings
-                        </a></li>
-                        <li><hr class="dropdown-divider"></li>
-
-                        <li><a class="dropdown-item d-flex align-items-center" href="pages-faq">
-                            <i class="bi bi-question-circle"></i> Need Help?
-                        </a></li>
-                        <li><hr class="dropdown-divider"></li>
-
-                        <li>
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
     </header>
 
-    <!-- ======= Sidebar ======= -->
+    <!-- Sidebar -->
     <aside id="sidebar" class="sidebar">
         <ul class="sidebar-nav" id="sidebar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="/kelola-menu">
+                <a class="nav-link" href="/indexadmin">
+                    <i class="bi bi-house-door"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="kelola-menu">
                     <i class="bi bi-list"></i>
                     <span>Kelola Menu</span>
                 </a>
@@ -265,8 +215,14 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.index') }}">
-                    <i class="bi bi-bookmark-check"></i>
+                <a class="nav-link" href="/footer">
+                    <i class="bi bi-table"></i>
+                    <span>Kelola Footer</span>
+                </a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.index') }}">
+                    <i class="bi bi-table"></i>
                     <span>Kelola Reservation</span>
                 </a>
             </li>
@@ -284,7 +240,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Daftar Booking Tabel | Hari Ini</h5>
+                            <h5 class="card-title">Daftar Booking Tabel / Hari Ini</h5>
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
@@ -311,7 +267,6 @@
                                             @endif
                                         </td>
                                     </tr>
-
                                     <!-- Modal for Payment Proof -->
                                     <div class="modal fade" id="paymentModal{{ $booking->id }}" tabindex="-1" aria-labelledby="paymentModalLabel{{ $booking->id }}" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
@@ -321,7 +276,8 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <img src="{{ asset('uploads/payments/' . $booking->payment?->proof_of_payment) }}" class="img-fluid" alt="Proof of Payment">
+                                                <img src="{{ asset('uploads/payments/' . $booking->payment?->proof_of_payment) }}" class="img-fluid" alt="Proof of Payment">
+
                                                 </div>
                                                 <div class="modal-footer">
                                                     <form action="{{ route('admin.booking.confirm', $booking->id) }}" method="POST" class="d-inline">
@@ -339,6 +295,7 @@
                                         </div>
                                     </div>
                                     @endforeach
+
                                     @else
                                     <tr>
                                         <td colspan="6" class="text-center">Tidak ada data booking</td>
@@ -349,7 +306,10 @@
                             <form action="{{ route('admin.booking.deleteAll') }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-warning mt-3">Hapus Semua Booking</button>
+                                <button type="submit" class="btn mt-3" style="background-color: #8174A0; color: white; border: none;">
+    Hapus Semua Booking
+</button>
+
                             </form>
                         </div>
                     </div>
@@ -359,9 +319,9 @@
     </main>
 
     <footer id="footer" class="footer">
-        <div class="copyright">
-            &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-        </div>
+      <div class="copyright">
+          &copy; Copyright <strong><span>Ataraxia</span></strong>. All Rights Reserved
+      </div>
     </footer>
 
     <!-- Bootstrap JS -->

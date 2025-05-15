@@ -96,7 +96,8 @@
             <div class="event-content">
                 <h3>{{ $event->name }}</h3>
                 <p>{{ $event->description }}</p>
-                <a href="{{ route('pilih-kursi') }}" class="btn-event">Beli Tiket</a>
+                <a href="{{ route('pilih-kursi', ['event_id' => $event->id]) }}" class="btn-event">Beli Tiket</a>
+
             </div>
         </div>
         @endforeach

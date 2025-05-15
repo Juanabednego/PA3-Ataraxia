@@ -12,7 +12,7 @@ class AdminController extends Controller
     
     public function index()
     {
-        $bookings = Booking::where('status', 'waiting_payment_confirmation')->get();
+        $bookings = Booking::where('status', 'waiting_payment_confirmation')->orderBy('created_at', 'desc')->get();
         return view('admin.tables-data', compact('bookings'));
     }
 

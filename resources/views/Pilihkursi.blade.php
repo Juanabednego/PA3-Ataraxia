@@ -222,6 +222,10 @@
     @include('layouts.footer')
 
     <script>
+    const eventId = "{{ $eventId }}"; 
+</script>
+
+    <script>
   $(document).ready(function() {
     const seatPrice = 150000;
     let selectedSeats = [];
@@ -289,9 +293,10 @@
         let selectedSeatsString = selectedSeats.join(', ');
 
         $.post("{{ route('booking.store') }}", {
-            _token: "{{ csrf_token() }}",
+            _token: "{{ csrf_token() }}", 
             seats: selectedSeatsString,
-            total_price: selectedSeats.length * seatPrice
+            total_price: selectedSeats.length * seatPrice,
+            event_id: eventId
         }).done(function(response) {
             if (response.booking_id) {
                 loadSeats();  // Reload seats to reflect the booking

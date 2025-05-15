@@ -9,5 +9,15 @@ class Event extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'image'];
+        
+    protected $fillable = ['name','description', 'harga', 'date', 'image'];
+    
+    protected $casts = [
+        'date' => 'datetime', // 👈 tambahkan ini
+    ];
+
+    public function booking()
+    {
+        return $this->belongsTo(Booking::class);
+    }
 }

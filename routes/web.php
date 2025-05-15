@@ -21,9 +21,36 @@ use App\Http\Controllers\AdminReservationController;
 use App\Http\Controllers\MakananController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\HistoriController;
+<<<<<<< HEAD
+=======
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\ReviewUserController;
+use App\Http\Controllers\AboutSectionAdminController;
+use App\Http\Controllers\SeatLayoutController;
+
+Route::get('/seat-builder', [SeatLayoutController::class, 'index'])->name('admin.seat-builder.index');
+Route::get('/admin/seat-builder', [SeatLayoutController::class, 'index'])->name('admin.seat-builder');
+Route::post('/admin/seat-builder/save', [SeatLayoutController::class, 'store'])->name('admin.seat-builder.save');
+>>>>>>> 2a06928 (Initial commit)
 
 
 
+
+
+Route::get('/kelola-about', [AboutSectionAdminController::class, 'index'])->name('admin.kelola-about.index');
+Route::get('/admin/kelola-about', [AboutSectionAdminController::class, 'edit']);
+Route::post('/admin/kelola-about', [AboutSectionAdminController::class, 'update']);
+
+
+Route::post('/review', [ReviewUserController::class, 'store'])->name('review.store');
+
+
+
+
+
+Route::get('/kelola-review', [ReviewController::class, 'index'])->name('admin.kelola-review.index');
+Route::get('/admin/kelola-review/{id}/edit', [ReviewController::class, 'edit'])->name('admin.kelola-review.edit');
+Route::patch('/admin/kelola-review/{id}', [ReviewController::class, 'update'])->name('admin.kelola-review.update');
 
 
 Route::middleware('auth')->group(function () {
@@ -71,7 +98,7 @@ Route::get('/footer', [FooterController::class, 'index'])->name('footer');
 
     Route::get('/kelola-event', [KelolaEventController::class, 'index'])->name('kelola-event');
     Route::post('/kelola-event/store', [KelolaEventController::class, 'store'])->name('kelola-event.store');
-    Route::post('/kelola-event/{id}', [KelolaEventController::class, 'update'])->name('kelola-event.update');
+    Route::patch('/kelola-event/{id}', [KelolaEventController::class, 'update'])->name('kelola-event.update');
     Route::delete('/kelola-event/{event}', [KelolaEventController::class, 'destroy'])->name('kelola-event.destroy');
 
     
@@ -85,6 +112,7 @@ Route::get('/footer', [FooterController::class, 'index'])->name('footer');
 Route::get('/index', function () {
     return view('index');
 })->name('index');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

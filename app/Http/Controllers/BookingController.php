@@ -12,6 +12,8 @@ class BookingController extends Controller
 {
     public function index(Request $request)
     {
+        $eventId = $request->event_id;
+
         // Ambil semua kursi yang sudah dibooking
         $bookedSeats = Booking::whereIn('status', ['confirmed', 'waiting_payment_confirmation'])
             ->pluck('seats')  // Mengambil kolom 'seats' yang berisi JSON kursi
@@ -23,13 +25,13 @@ class BookingController extends Controller
             $formattedSeats = array_merge($formattedSeats, json_decode($seatString, true) ?? []);
         }
     
-        // Jika request dari AJAX, kirim data JSON
+       
         if ($request->ajax()) {
             return response()->json(['formattedSeats' => $formattedSeats]);
-        }
+        }   
     
         // Kirim data kursi yang sudah dibooking ke view
-        return view('Pilihkursi', compact('formattedSeats'));
+        return view('pilihkursi', compact('formattedSeats', 'eventId'));
     }
     
     
@@ -37,6 +39,7 @@ class BookingController extends Controller
     public function store(Request $request)
 {
     $request->validate([
+        'event_id' => 'required|exists:events,id',
         'seats' => 'required|string',
         'total_price' => 'required|numeric'
     ]);
@@ -67,6 +70,7 @@ class BookingController extends Controller
         // Create new booking
         $booking = Booking::create([
             'user_id' => $userId,
+            'event_id' => $request->event_id,
             'seats' => json_encode($selectedSeats),
             'total_price' => $request->total_price,
             'status' => 'pending'  // Keep status as pending until payment is confirmed

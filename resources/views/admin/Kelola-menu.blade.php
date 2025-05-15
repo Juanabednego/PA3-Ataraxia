@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Kelola Menu</title>
@@ -228,6 +229,16 @@
 <main id="main" class="main">
     <div class="container">
         <h2>Kelola Makanan/Minuman</h2>
+=======
+    <title>Kelola Menu</title>
+</head>
+@include('layouts.AdminNav')
+<body>
+  <!-- Main Content -->
+<main id="main" class="main">
+    <div class="container">
+        <h2>Kelola Makanan & Minuman</h2>
+>>>>>>> 2a06928 (Initial commit)
 
         <!-- Menampilkan pesan sukses -->
         @if(session('success'))
@@ -235,7 +246,13 @@
         @endif
 
         <!-- Button untuk tambah makanan/minuman -->
+<<<<<<< HEAD
         <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addMakananModal">Tambah Makanan/Minuman</button>
+=======
+<button class="btn mb-3" style="background-color: #8174A0; color: white;" data-bs-toggle="modal" data-bs-target="#addMakananModal">
+    Tambah Makanan/Minuman
+</button>
+>>>>>>> 2a06928 (Initial commit)
 
         <!-- Table List Makanan/Minuman -->
         <table class="table table-striped">
@@ -263,6 +280,7 @@
                         <td>{{ number_format($makanan->harga , 0 , ',' , '.') }}</td>
                         <td>
                             <!-- Tombol Edit -->
+<<<<<<< HEAD
                             <button type="button" class="btn btn-warning btn-sm"
                                  data-bs-toggle="modal"
                                   data-bs-target="#editMakananModal"
@@ -273,6 +291,20 @@
                                  data-role="{{ $makanan->role }}">
                                    Edit
                                     </button>
+=======
+                            <button type="button" class="btn btn-sm"
+                            style="background-color: #8174A0; color: white; border-color: #8174A0;"
+                            data-bs-toggle="modal"
+                            data-bs-target="#editMakananModal"
+                            data-id="{{ $makanan->id }}"
+                            data-nama="{{ $makanan->nama_makanan }}"
+                            data-deskripsi="{{ $makanan->deskripsi }}"
+                            data-harga="{{ $makanan->harga }}"
+                            data-role="{{ $makanan->role }}">
+                            Edit
+                        </button>
+
+>>>>>>> 2a06928 (Initial commit)
 
 
                             <!-- Tombol Hapus -->
@@ -326,7 +358,14 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+<<<<<<< HEAD
                         <button type="submit" class="btn btn-primary">Simpan</button>
+=======
+                        <button type="submit" class="btn" style="background-color: #8174A0; color: white; border: 1px solid #8174A0;">
+  Simpan
+</button>
+
+>>>>>>> 2a06928 (Initial commit)
                     </div>
                 </form>
             </div>
@@ -372,7 +411,14 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+<<<<<<< HEAD
           <button type="submit" class="btn btn-primary">Update</button>
+=======
+          <button type="submit" class="btn" style="background-color: #8174A0; color: white; border: 1px solid #8174A0;">
+  Update
+</button>
+
+>>>>>>> 2a06928 (Initial commit)
         </div>
       </form>
     </div>
@@ -413,6 +459,7 @@ document.getElementById('edit_role').value = role;
 
 </main>
 
+<<<<<<< HEAD
 <footer id="footer" class="footer mt-auto py-3 bg-light">
     <div class="container">
         <div class="text-center text-muted">
@@ -420,9 +467,20 @@ document.getElementById('edit_role').value = role;
         </div>
     </div>
 </footer>
+=======
+<footer id="footer" class="footer">
+      <div class="copyright">
+          &copy; Copyright <strong><span>Ataraxia</span></strong>. All Rights Reserved
+      </div>
+    </footer>
+>>>>>>> 2a06928 (Initial commit)
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> 2a06928 (Initial commit)

@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Reservasi Restoran</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet"/>
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  
   <style>
     body {
       font-family: 'Poppins', sans-serif;
@@ -63,28 +61,28 @@
 
     .btn-primary,
     .btn-secondary {
+      background: #F44336;
       width: 100%;
       margin-top: 20px;
     }
 
     .btn-primary {
-      background: #ffc107;
+      background: #4CAF50;
       border: none;
     }
   </style>
 </head>
 
 <body>
-@include('layouts.Navbar')
   <div class="reservation-container">
     <div class="step-indicator">
       <div class="step" id="step-label-1">
         <div class="step-number">1</div>
-        <div>Reservation</div>
+        <div>Reservasi</div>
       </div>
       <div class="step inactive" id="step-label-2">
         <div class="step-number">2</div>
-        <div>Information</div>
+        <div>Detail</div>
       </div>
     </div>
 
@@ -92,63 +90,44 @@
     <div id="step1">
       <form>
         <div class="mb-3">
-          <label class="form-label">Adults</label>
-          <select class="form-select">
-          <option selected>0 Adult</option>
-            <option>1 Adult</option>
-            <option >2 Adults</option>
-            <option>3 Adults</option>
-            <option>4 Adult</option>
-            <option >5 Adults</option>
-            <option>6 Adults</option>
-            <option>7 Adult</option>
-            <option >8 Adults</option>
-            <option>9 Adults</option>
-            <option>10 Adults</option>
-          </select>
+          <label class="form-label">Dewasa</label>
+          <input type="number" class="form-control" id="adults" value="0" min="0" max="75" placeholder=""
+            onfocus="clearZero(this)" />
         </div>
-        <div class="mb-3">  
-          <label class="form-label">Children</label>
-          <select class="form-select">
-            <option selected>0 Child</option>
-            <option>1 Child</option>
-            <option>2 Children</option>
-            <option>3 Child</option>
-            <option>4 Children</option>
-            <option>5 Child</option>
-            <option>6 Children</option>
-            <option>7 Child</option>
-            <option>8 Children</option>
-            <option>9 Child</option>
-            <option>10 Children</option>
-          </select>
+
+        <div class="mb-3">
+          <label class="form-label">Anak-Anak</label>
+          <input type="number" class="form-control" id="children" value="0" min="0" max="75" placeholder=""
+            onfocus="clearZero(this)" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Tanggal</label>
+          <input type="date" class="form-control" id="date" />
         </div>
         <div class="mb-3">
-          <label class="form-label">Date</label>
-          <input type="date" class="form-control" value="2025-04-11" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Time</label>
-          <input type="time" class="form-control" value="12:00" />
+          <label class="form-label">Waktu</label>
+          <input type="time" class="form-control" id="time" />
         </div>
 
         <div class="house-rules mb-3">
-          <strong>House Rules:</strong>
+          <strong>Peraturan :</strong>
           <ul>
-            <li>Restaurant dining time is limited to 2 hours</li>
-            <li><strong>Please state your preferred dining area (smoking/non-smoking)</strong> in the special request box. This request is not guaranteed and subject to availability.</li>
-            <li>Reservation will be held for 15 minutes past booking time</li>
-            <li>For groups above 10 people, please contact us directly on WhatsApp</li>
+            <li>Datang lah Tepat Waktu</li>
+            <li><strong>Telat 30 menit tanpa konfirmasi dianggap Batal</strong></li>
+            <li>Dilarang membawa makanan dari luar</li>
+            <li>Untuk Konfirmasi lebih lanjut silahkan hubungi kontak kami</li>
           </ul>
         </div>
 
         <div class="form-check mb-3">
-          <input class="form-check-input" type="checkbox" checked />
-          <label class="form-check-label">I have read and agree to the above terms and conditions.</label>
+          <input class="form-check-input" type="checkbox" id="agree" />
+          <label class="form-check-label">Saya telah membaca dan menyetujui syarat dan ketentuan di atas.</label>
         </div>
+
         <div class="d-flex justify-content-between">
-          <a href="/" class="btn btn-secondary" >Back</a>
-          <button type="button" class="btn btn-primary" onclick="showStep(2)">Next</button>
+          <a href="/" class="btn btn-secondary">Kembali</a>
+          <button type="button" class="btn btn-primary" onclick="validateStep1()">Berikutnya</button>
         </div>
       </form>
     </div>
@@ -156,28 +135,8 @@
     <!-- Step 2 -->
     <div id="step2" style="display: none">
       <form>
-        <h5 class="mb-4">
-          We have a table for you at <strong>Ataraxia</strong>
-        </h5>
-
-        <div class="row mb-3">
-          <div class="col-md-2">
-            <select class="form-select">
-              <option>Mr.</option>
-              <option>Mrs.</option>
-              <option>Ms.</option>
-            </select>
-          </div>
-          <div class="col-md-5">
-            <input type="text" class="form-control" placeholder="First Name" required />
-          </div>
-          <div class="col-md-5">
-            <input type="text" class="form-control" placeholder="Last Name" />
-          </div>
-        </div>
-
         <div class="mb-3">
-          <input type="email" class="form-control" placeholder="Email Address" required />
+          <input type="email" class="form-control" placeholder="Masukkan Nama anda" id="email" required />
         </div>
 
         <div class="mb-3 row">
@@ -185,48 +144,27 @@
             <input type="text" class="form-control" value="+62" disabled />
           </div>
           <div class="col-md-9">
-            <input type="tel" class="form-control" placeholder="Phone Number" required />
+            <input type="tel" class="form-control" placeholder="Nomor Telepon" id="phone" required />
           </div>
         </div>
 
         <div class="mb-3">
-          <textarea class="form-control" maxlength="85" placeholder="Message (Maximum 85 characters.)"></textarea>
+          <textarea class="form-control" maxlength="85" placeholder="Pesan (Maksimal 85 karakter.)"></textarea>
         </div>
 
-
         <div class="form-check mb-4">
-          <input class="form-check-input" type="checkbox" />
-          <label class="form-check-label">
-            I’d love to receive personalised dining recommendations and deals!
-          </label>
+          <input class="form-check-input" type="checkbox" id="promotions" />
+          <label class="form-check-label">Saya ingin sekali menerima rekomendasi dan penawaran tempat makan yang dipersonalisasi!</label>
         </div>
 
         <div class="d-flex justify-content-between">
-          <button type="button" class="btn btn-secondary" onclick="showStep(1)">Back</button>
-          <button type="submit" class="btn btn-primary">Confirm Booking</button>
+          <button type="button" class="btn btn-secondary" onclick="showStep(1)">Kembali</button>
+          <button type="button" class="btn btn-primary" onclick="validateStep2()">Konfirmasi Booking</button>
         </div>
       </form>
     </div>
   </div>
-   <!-- Modal Konfirmasi -->
-   <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="confirmationModalLabel">Berhasil Mengirimkan Permintaan</h5>
-                </div>
-                <div class="modal-body text-center">
-                    <p>Anda akan mendapatkan notifikasi jika sudah dikonfirmasi</p>
-                </div>
-                <div class="modal-footer">
-                    <a href="/" class="btn btn-success w-100">Kembali ke Beranda</a>
-                </div>
-            </div>
-        </div>
-    </div>
-  </div>
-  </div>
-@include('layouts.footer')
+
   <script>
     function showStep(step) {
       document.getElementById("step1").style.display = step === 1 ? "block" : "none";
@@ -235,50 +173,79 @@
       document.getElementById("step-label-2").classList.toggle("inactive", step !== 2);
     }
 
-    document.addEventListener("DOMContentLoaded", function () {
-  const formStep2 = document.querySelector("#step2 form");
-  formStep2.addEventListener("submit", async function (e) {
-    e.preventDefault();
-
-    const data = {
-      name: document.querySelector('input[placeholder="First Name"]').value + ' ' +
-            document.querySelector('input[placeholder="Last Name"]').value,
-      email: document.querySelector('input[placeholder="Email Address"]').value,
-      phone: document.querySelector('input[placeholder="Phone Number"]').value,
-      date: document.querySelector('input[type="date"]').value,
-      time: document.querySelector('input[type="time"]').value,
-      people: document.querySelectorAll("select.form-select")[0].value + ', ' +
-              document.querySelectorAll("select.form-select")[1].value,
-      note: document.querySelector("textarea").value
-    };
-
-    try {
-      const response = await fetch("/reservation", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
-        },
-        body: JSON.stringify(data)
-      });
-
-      if (response.ok) {
-        const modal = new bootstrap.Modal(document.getElementById("confirmationModal"));
-        modal.show();
-      } else {
-        alert("Failed to save reservation.");
-      }
-    } catch (error) {
-      console.error("Error submitting reservation:", error);
-      alert("An error occurred.");
+    function clearZero(input) {
+      if (input.value === "0") input.value = "";
     }
-  });
-});
 
+    function validateStep1() {
+      const adults = document.getElementById("adults").value;
+      const children = document.getElementById("children").value;
+      const date = document.getElementById("date").value;
+      const time = document.getElementById("time").value;
+      const agree = document.getElementById("agree").checked;
 
-  </script>
+      // Validasi semua field harus diisi
+      if (!adults || !children || !date || !time) {
+        alert("Harap lengkapi semua kolom.");
+        return;
+      }
+
+      // Validasi minimal 1 orang (dewasa atau anak)
+      if (parseInt(adults) === 0 && parseInt(children) === 0) {
+        alert("Harap masukkan jumlah minimal 1 orang (dewasa atau anak-anak).");
+        return;
+      }
+
+      // Validasi persetujuan
+      if (!agree) {
+        alert("Harap centang persetujuan syarat dan ketentuan.");
+        return;
+      }
+
+      // Validasi tanggal tidak boleh di masa lalu
+      const selectedDate = new Date(date);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      if (selectedDate < today) {
+        alert("Tanggal tidak boleh di masa lalu.");
+        return;
+      }
+
+      showStep(2);
+    }
+
+    function validateStep2() {
+      const name = document.getElementById("email").value.trim(); // Sebenarnya ini field nama, bukan email
+      const phone = document.getElementById("phone").value.trim();
+      const message = document.querySelector("#step2 textarea").value.trim();
+
+      // Validasi semua field wajib
+      if (!name || !phone) {
+        alert("Nama dan nomor telepon wajib diisi.");
+        return;
+      }
+
+      // Validasi format nomor telepon (minimal 9 digit, maksimal 15 digit)
+      const phoneRegex = /^[0-9]{9,15}$/;
+      if (!phoneRegex.test(phone)) {
+        alert("Nomor telepon hanya boleh angka (9-15 digit).");
+        return;
+      }
+
+      // Validasi panjang pesan (opsional)
+      if (message.length > 85) {
+        alert("Pesan maksimal 85 karakter.");
+        return;
+      }
+
+      // Jika semua validasi berhasil
+      alert("Reservasi berhasil dikonfirmasi!");
+      
+      // Di sini bisa tambahkan kode untuk submit form atau redirect
+      // Contoh: document.forms[0].submit();
+    }
+</script>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
-
 </html>

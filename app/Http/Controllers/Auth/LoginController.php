@@ -19,7 +19,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/book-table';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -40,6 +40,6 @@ class LoginController extends Controller
         if ($user->role === 'admin') {
             return redirect('/indexadmin'); // Admin ke halaman dashboard admin
         }
-        return redirect('/book-table'); // User biasa ke halaman booking table
+        return redirect('/'); // User biasa ke halaman booking table
     }
 }
